@@ -30,11 +30,11 @@ public class HeroController {
         return "hero/list-page";
     }
 
-    @GetMapping("/remove/{id}")
-    public String remove(@PathVariable long id) {
+    /*@GetMapping("/remove/{id}")
+    public String remove(@PathVariable Long id) {
         heroRepository.delete(id);
         return "redirect:/hero/list";
-    }
+    }*/
 
     @GetMapping("/add")
     public String add(Model model) {

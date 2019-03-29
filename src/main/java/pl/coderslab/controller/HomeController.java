@@ -29,7 +29,7 @@ public class HomeController {
         return "admin";
     }
 
-    @GetMapping("/create-user")
+    /*@GetMapping("/create-user")
     @ResponseBody
     public String createUser() {
         User user = new User();
@@ -37,6 +37,6 @@ public class HomeController {
         user.setPassword("admin");
         userService.saveUser(user);
         return "-created-";
-    }
+    }*/
 
 }
