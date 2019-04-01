@@ -8,6 +8,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @SpringBootApplication
 public class LibraryApplication extends SpringBootServletInitializer {
 
+    //Overrtide ?
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(LibraryApplication.class);
@@ -18,3 +19,7 @@ public class LibraryApplication extends SpringBootServletInitializer {
     }
 
 }
+
+
+
+//extends SpringBootServletInitializer

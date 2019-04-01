@@ -13,7 +13,10 @@
 <body>
 <h1>My library index page</h1>
 
-<a href="${pageContext.request.contextPath}/book/list">List all books</a>
+<a href="${pageContext.request.contextPath}/books/">List all books</a>
+<hr>
+
+<a href="${pageContext.request.contextPath}/books/5">List book with id=5</a>
 
 </body>
 </html>

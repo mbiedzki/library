@@ -30,6 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/admin").authenticated()
                 .and().formLogin();
+
+        http.cors();
     }
 
 }
