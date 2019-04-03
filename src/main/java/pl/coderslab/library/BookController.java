@@ -26,5 +26,30 @@ public class BookController {
         return bookService.findBookById(id);
     }
 
+    @PutMapping("/{id}")
+    public void updateBook(@RequestBody Book book, @PathVariable Long id) {
+
+        Book bookToBeUpdated = bookService.findBookById(id);
+
+        if(bookToBeUpdated==null) {
+            bookService.saveBook(book);
+        } else {
+            book.setId(id);
+            bookService.saveBook(book);
+        }
+
+    }
+
+    @PostMapping("/")
+    public void newBook(@RequestBody Book newBook) {
+        bookService.saveBook(newBook);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteBook (@PathVariable Long id) {
+        bookService.deleteBook(id);
+    }
+
+
 
 }
