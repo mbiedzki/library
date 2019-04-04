@@ -1,8 +1,9 @@
-package pl.coderslab.library;
+package pl.coderslab.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.coderslab.repository.UserRepository;
+import pl.coderslab.repository.BookRepository;
+import pl.coderslab.model.Book;
 
 import java.util.List;
 
@@ -19,8 +20,11 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-    public void saveBook(Book book) {
-        bookRepository.save(book);
+    public Book saveBook(Book book) {
+        return bookRepository.save(book);
+
+    } public void addBook(Book book) {
+            bookRepository.save(book);
     }
 
     public void deleteBook(Long id) {

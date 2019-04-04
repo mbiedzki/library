@@ -1,12 +1,15 @@
-package pl.coderslab.library;
+package pl.coderslab.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.service.BookService;
+import pl.coderslab.model.Book;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-@CrossOrigin
+@CrossOrigin(methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
 @RestController
 @RequestMapping("/books")
 public class BookController {
@@ -27,22 +30,22 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public void updateBook(@RequestBody Book book, @PathVariable Long id) {
+    public Book updateBook(@RequestBody Book book, @PathVariable Long id) {
 
         Book bookToBeUpdated = bookService.findBookById(id);
 
-        if(bookToBeUpdated==null) {
-            bookService.saveBook(book);
-        } else {
-            book.setId(id);
-            bookService.saveBook(book);
-        }
+            bookToBeUpdated.setTitle(book.getTitle());
+            bookToBeUpdated.setAuthor(book.getAuthor());
+            bookToBeUpdated.setCategory(book.getCategory());
+            bookToBeUpdated.setFormat(book.getFormat());
+
+            return bookService.saveBook(bookToBeUpdated);
 
     }
 
     @PostMapping("/")
     public void newBook(@RequestBody Book newBook) {
-        bookService.saveBook(newBook);
+        bookService.addBook(newBook);
     }
 
     @DeleteMapping("/{id}")

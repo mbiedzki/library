@@ -1,4 +1,4 @@
-package pl.coderslab.library;
+package pl.coderslab.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -11,7 +11,7 @@ import javax.persistence.*;
 
 
 @Entity
-@JsonSerialize
+/*@JsonSerialize*/
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name="books")
 public class Book {
@@ -22,6 +22,16 @@ public class Book {
     private String author;
     private String category;
     private String format;
+
+    public Book(String title, String author, String category, String format) {
+        this.title = title;
+        this.author = author;
+        this.category = category;
+        this.format = format;
+    }
+
+    public Book() {
+    }
 
     public Long getId() {
         return id;
