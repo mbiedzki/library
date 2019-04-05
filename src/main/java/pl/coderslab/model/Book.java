@@ -11,19 +11,22 @@ import javax.persistence.*;
 
 
 @Entity
+@Data
 /*@JsonSerialize*/
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name="books")
 public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String author;
     private String category;
     private String format;
 
-    public Book(String title, String author, String category, String format) {
+
+    /*public Book(Long id, String title, String author, String category, String format) {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.category = category;
@@ -31,7 +34,7 @@ public class Book {
     }
 
     public Book() {
-    }
+    }*/
 
     public Long getId() {
         return id;

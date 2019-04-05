@@ -43,9 +43,15 @@ public class BookController {
 
     }
 
-    @PostMapping("/")
-    public void newBook(@RequestBody Book newBook) {
-        bookService.addBook(newBook);
+    @RequestMapping(value = "/", method=RequestMethod.POST)
+    public Book newBook(@RequestBody Book newBook) {
+
+        Book bookToBeAdded = new Book();
+        bookToBeAdded.setTitle(newBook.getTitle());
+        bookToBeAdded.setAuthor(newBook.getAuthor());
+        bookToBeAdded.setCategory(newBook.getCategory());
+        bookToBeAdded.setFormat(newBook.getFormat());
+        return bookService.addBook(bookToBeAdded);
     }
 
     @DeleteMapping("/{id}")
