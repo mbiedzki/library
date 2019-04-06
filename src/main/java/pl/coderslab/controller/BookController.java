@@ -47,6 +47,7 @@ public class BookController {
     public Book newBook(@RequestBody Book newBook) {
 
         Book bookToBeAdded = new Book();
+        bookToBeAdded.setId(null);
         bookToBeAdded.setTitle(newBook.getTitle());
         bookToBeAdded.setAuthor(newBook.getAuthor());
         bookToBeAdded.setCategory(newBook.getCategory());
