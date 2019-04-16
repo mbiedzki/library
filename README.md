@@ -1,4 +1,4 @@
 #### Library REST server project
 
-This is my first REST server project.
-It allows to use all REST functionality on my personal books library.
+It allows to use all REST (getAll, getOne, update, add, delete) functionality on my personal books library.
+Technologies used: Java, Spring Boot, Spring Security, JSON, MySQL.
