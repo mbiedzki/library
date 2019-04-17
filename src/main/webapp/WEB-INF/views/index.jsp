@@ -20,9 +20,11 @@
 
 <div class="w3-container w3-xlarge">
     <a class="w3-button w3-xlarge w3-border w3-border-amber w3-round-xxlarge"
-       href="${pageContext.request.contextPath}/books/">List all books in native JSON</a>
+       href="${pageContext.request.contextPath}/books/">Test -  all books in native JSON</a>
 </div>
-<hr>
+<hr/>
+
+
 <div class="w3-container w3-xlarge">
     <a class="w3-button w3-xlarge w3-border w3-border-amber w3-round-xxlarge"
        href="${pageContext.request.contextPath}/admin/">Admin panel</a>

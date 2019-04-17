@@ -10,6 +10,7 @@ import pl.coderslab.repository.UserRepository;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 @Service("userService")
 public class UserService {
@@ -37,6 +38,14 @@ public class UserService {
         Role userRole = roleRepository.findByRole("ADMIN");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
+    }
+
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public void delete(Long id) {
+        userRepository.deleteById(id);
     }
 
 }

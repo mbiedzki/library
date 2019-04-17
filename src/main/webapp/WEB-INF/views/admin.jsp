@@ -21,7 +21,45 @@
 <div class="w3-container w3-xlarge">
     <a class="w3-button w3-xlarge w3-border w3-border-amber w3-round-xxlarge"
        href="${pageContext.request.contextPath}/logout">Logout</a>
+    <a class="w3-button w3-xlarge w3-border w3-border-amber w3-round-xxlarge"
+       href="${pageContext.request.contextPath}/users/add">New User</a>
 </div>
+<hr/>
+
+<div class="w3-container w3-large">
+    <table class="w3-table-all">
+        <thead>
+        <tr class="w3-amber">
+            <td>ID</td>
+            <td>Name</td>
+            <td>Active</td>
+            <td>Roles</td>
+            <td>Edit</td>
+            <td>Delete</td>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${users}" var="user">
+            <tr>
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+                <td>${user.active}</td>
+
+                <td>
+                    <c:forEach items="${user.roles}" var="role">
+                        ${role.role} <br>
+                    </c:forEach>
+                </td>
+
+                <td><a href="${pageContext.request.contextPath}/users/edit/${user.id}">Edit</a></td>
+                <td><a href="${pageContext.request.contextPath}/users/delete/${user.id}"
+                       onclick="return confirm ('Are you sure that you want to delete ?')">Delete</a></td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>
+
 
 </body>
 </html>
