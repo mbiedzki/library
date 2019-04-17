@@ -15,6 +15,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return bCryptPasswordEncoder;
     }
 
+    // for future uses
     /*@Override
     public void addViewControllers(ViewControllerRegistry registry) {
         //registry.addViewController("/login").setViewName("login");

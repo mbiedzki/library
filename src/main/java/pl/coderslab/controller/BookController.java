@@ -20,7 +20,7 @@ public class BookController {
     @GetMapping("/")
     public List<Book> getBooks(HttpServletResponse response) {
         response.setContentType("application/json");
-        return  bookService.findAllBooks();
+        return bookService.findAllBooks();
     }
 
     @GetMapping("/{id}")
@@ -34,16 +34,16 @@ public class BookController {
 
         Book bookToBeUpdated = bookService.findBookById(id);
 
-            bookToBeUpdated.setTitle(book.getTitle());
-            bookToBeUpdated.setAuthor(book.getAuthor());
-            bookToBeUpdated.setCategory(book.getCategory());
-            bookToBeUpdated.setFormat(book.getFormat());
+        bookToBeUpdated.setTitle(book.getTitle());
+        bookToBeUpdated.setAuthor(book.getAuthor());
+        bookToBeUpdated.setCategory(book.getCategory());
+        bookToBeUpdated.setFormat(book.getFormat());
 
-            return bookService.saveBook(bookToBeUpdated);
+        return bookService.saveBook(bookToBeUpdated);
 
     }
 
-    @RequestMapping(value = "/", method=RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     public Book newBook(@RequestBody Book newBook) {
 
         Book bookToBeAdded = new Book();
@@ -56,10 +56,9 @@ public class BookController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteBook (@PathVariable Long id) {
+    public void deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
     }
-
 
 
 }

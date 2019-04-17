@@ -1,6 +1,7 @@
 package pl.coderslab.model;
 
 import lombok.Data;
+
 import javax.persistence.*;
 
 @Data

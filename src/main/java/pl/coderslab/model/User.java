@@ -2,6 +2,7 @@ package pl.coderslab.model;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Set;

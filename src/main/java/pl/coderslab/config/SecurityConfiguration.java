@@ -48,7 +48,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
-                //.antMatchers("/registration").permitAll()
                 .antMatchers("/admin/**")
                 .hasRole("ADMIN")
                 .and().csrf().disable().formLogin()
@@ -63,6 +62,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .accessDeniedPage("/access-denied");
     }
 
+    //for future use
     @Override
     public void configure(WebSecurity web) throws Exception {
         web

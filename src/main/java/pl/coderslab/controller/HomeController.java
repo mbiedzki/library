@@ -8,20 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import pl.coderslab.service.BookService;
 import pl.coderslab.service.UserService;
+
 import javax.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
-    @Autowired
-    private BookService bookService;
-
-    private final UserService userService;
-
-
-    public HomeController(UserService userService) {
-        this.userService = userService;
-    }
-
 
     @GetMapping("/")
     public String index() {
@@ -40,6 +31,7 @@ public class HomeController {
 
     @GetMapping("/access-denied")
     public String denied() {
+        //clearing context to allow for fresh authentication
         SecurityContextHolder.clearContext();
         return "access-denied";
     }
