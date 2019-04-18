@@ -10,6 +10,7 @@
     <title>Library</title>
     <style>
         <%@include file="w3.css" %>
+        <%@include file="style.css" %>
     </style>
 <body>
 
@@ -22,9 +23,17 @@
     <a class="w3-button w3-xlarge w3-border w3-border-amber w3-round-xxlarge"
        href="${pageContext.request.contextPath}/logout">Logout</a>
     <a class="w3-button w3-xlarge w3-border w3-border-amber w3-round-xxlarge"
-       href="${pageContext.request.contextPath}/admin">Return</a>
+       href="${pageContext.request.contextPath}/">Return</a>
 </div>
 <hr/>
+
+<c:if test="${existsError==true}">
+    <div class="w3-panel w3-red w3-display-container">
+    <span onclick="this.parentElement.style.display='none';"
+          class="w3-button w3-large w3-display-topright">&times;</span>
+        <p>This user name already exists in the database !</p>
+    </div>
+</c:if>
 
 <div class="w3-container w3-large">
     <form:form method="post" modelAttribute="user">
@@ -34,24 +43,32 @@
         <form:errors path="name" cssClass="error" element="div"/><br><br>
 
         <span style='width: 20%; display: inline-block'>Password : </span>
-        <form:password cssStyle="width: 30%" path="password"/>
+        <form:input cssStyle="width: 30%" path="password"/>
         <form:errors path="password" cssClass="error" element="div"/><br><br>
 
-        <span style='width: 20%; display: inline-block; vertical-align: top'>Roles : </span>
-        <form:select cssStyle="width: 30%"  path="roles" multiple="true">
-            <form:option value="0" label="--Select roles--"/>
-            <form:options items="${roles}" itemLabel="role" itemValue="id"/>
-        </form:select><br><br>
-        <form:errors path="roles" cssClass="error" element="div"/>
+        <c:if test="${noAdmin!=true}">
+            <span style='width: 20%; display: inline-block; vertical-align: top'>Roles : </span>
+            <form:select cssStyle="width: 30%" path="roles" multiple="true">
+                <form:option value="0" label="--Select roles--"/>
+                <form:options items="${roles}" itemLabel="role" itemValue="id"/>
+            </form:select><br><br>
+            <form:errors path="roles" cssClass="error" element="div"/>
+            <span style='width: 20%; display: inline-block'>Active : </span>
+            <form:checkbox cssStyle="width: 30%" path="active"/>
+            <form:errors path="active" cssClass="error" element="div"/><br><br>
+        </c:if>
 
-        <span style='width: 20%; display: inline-block'>Active : </span>
-        <form:checkbox cssStyle="width: 30%" path="active"/>
-        <form:errors path="active" cssClass="error" element="div"/><br><br>
+        <c:if test="${noAdmin==true}">
+            <form:hidden path="roles"/>
+            <form:hidden path="active"/>
+        </c:if>
+
 
         <hr>
         <button type="submit"
                 class="w3-button w3-xlarge w3-border w3-border-amber w3-round-xxlarge">
-            Save</button>
+            Save
+        </button>
     </form:form>
 </div>
 

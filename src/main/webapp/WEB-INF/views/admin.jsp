@@ -22,7 +22,9 @@
     <a class="w3-button w3-xlarge w3-border w3-border-amber w3-round-xxlarge"
        href="${pageContext.request.contextPath}/logout">Logout</a>
     <a class="w3-button w3-xlarge w3-border w3-border-amber w3-round-xxlarge"
-       href="${pageContext.request.contextPath}/users/add">New User</a>
+       href="${pageContext.request.contextPath}/">Return</a>
+    <a class="w3-button w3-xlarge w3-border w3-border-amber w3-round-xxlarge"
+       href="${pageContext.request.contextPath}/user/add">New User</a>
 </div>
 <hr/>
 
@@ -51,8 +53,8 @@
                     </c:forEach>
                 </td>
 
-                <td><a href="${pageContext.request.contextPath}/users/edit/${user.id}">Edit</a></td>
-                <td><a href="${pageContext.request.contextPath}/users/delete/${user.id}"
+                <td><a href="${pageContext.request.contextPath}/user/edit/${user.id}">Edit</a></td>
+                <td><a href="${pageContext.request.contextPath}/user/delete/${user.id}"
                        onclick="return confirm ('Are you sure that you want to delete ?')">Delete</a></td>
             </tr>
         </c:forEach>

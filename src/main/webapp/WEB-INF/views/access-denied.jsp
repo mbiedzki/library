@@ -19,7 +19,7 @@
 <hr>
 
 <div class="w3-container w3-red w3-xlarge w3-center">
-    <h2>You don't have access to the administration panel !</h2>
+    <h2>You don't have access to the page you tried to login to !</h2>
 </div>
 <hr>
 

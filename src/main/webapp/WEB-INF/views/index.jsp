@@ -24,10 +24,21 @@
 </div>
 <hr/>
 
+<c:if test="${param.out==true}">
+    <div class="w3-panel w3-green w3-display-container w3-xlarge w3-center">
+    <span onclick="this.parentElement.style.display='none';"
+          class="w3-button w3-large w3-display-topright">&times;</span>
+        <p>Succesfully loged out</p>
+    </div>
+</c:if>
 
 <div class="w3-container w3-xlarge">
     <a class="w3-button w3-xlarge w3-border w3-border-amber w3-round-xxlarge"
        href="${pageContext.request.contextPath}/admin/">Admin panel</a>
+    <a class="w3-button w3-xlarge w3-border w3-border-amber w3-round-xxlarge"
+       href="${pageContext.request.contextPath}/user/">User panel</a>
+    <a class="w3-button w3-xlarge w3-border w3-border-amber w3-round-xxlarge"
+       href="${pageContext.request.contextPath}/logout">Logout</a>
 </div>
 
 </body>
