@@ -17,13 +17,25 @@
     <h1>My Library Server Index Page</h1>
 </div>
 <hr>
-
-<div class="w3-container w3-xlarge">
-    <a class="w3-button w3-xlarge w3-border w3-border-amber w3-round-xxlarge"
-       href="${pageContext.request.contextPath}/books/">Test -  all books in native JSON</a>
+<div class="w3-container w3-amber w3-large" align="center">
+    <h2>Test functions</h2>
 </div>
 <hr/>
-
+<div class="w3-container w3-xlarge">
+    <a class="w3-button w3-xlarge w3-border w3-border-amber w3-round-xxlarge"
+       href="${pageContext.request.contextPath}/books/">Test -  all books in native JSON</a><hr/>
+    <a class="w3-button w3-xlarge w3-border w3-border-amber w3-round-xxlarge"
+       href="${pageContext.request.contextPath}/swagger-ui.html">REST API documentation</a><hr/>
+    <a class="w3-button w3-xlarge w3-border w3-border-amber w3-round-xxlarge"
+       href="${pageContext.request.contextPath}/actuator/health">Actuator health</a>
+    <a class="w3-button w3-xlarge w3-border w3-border-amber w3-round-xxlarge"
+       href="${pageContext.request.contextPath}/actuator/info">Actuator info</a>
+</div>
+<hr/>
+<div class="w3-container w3-amber w3-large" align="center">
+    <h2>Admin functions</h2>
+</div>
+<hr/>
 <c:if test="${param.out==true}">
     <div class="w3-panel w3-green w3-display-container w3-xlarge w3-center">
     <span onclick="this.parentElement.style.display='none';"
