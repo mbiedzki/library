@@ -35,6 +35,14 @@
     </div>
 </c:if>
 
+<c:if test="${passwordError==true}">
+    <div class="w3-panel w3-red w3-display-container">
+    <span onclick="this.parentElement.style.display='none';"
+          class="w3-button w3-large w3-display-topright">&times;</span>
+        <p>Input passwords must be identical and must have at least 4 characters  !</p>
+    </div>
+</c:if>
+
 <div class="w3-container w3-large">
     <form:form method="post" modelAttribute="user">
 
@@ -42,11 +50,14 @@
         <form:input cssStyle="width: 30%" path="name"/>
         <form:errors path="name" cssClass="error" element="div"/><br><br>
 
-        <span style='width: 20%; display: inline-block'>Password : </span>
-        <form:input cssStyle="width: 30%" path="password"/>
-        <form:errors path="password" cssClass="error" element="div"/><br><br>
+        <form:hidden path="password"/>
 
-        <c:if test="${noAdmin!=true}">
+        <span style='width: 20%; display: inline-block'>New password : </span>
+        <input type="password" style="width: 30%" name="newPassword1"/><br><br>
+        <span style='width: 20%; display: inline-block'>Repeat New password : </span>
+        <input type="password" style="width: 30%" name="newPassword2"/><br><br>
+
+        <c:if test="${isAdmin!=false}">
             <span style='width: 20%; display: inline-block; vertical-align: top'>Roles : </span>
             <form:select cssStyle="width: 30%" path="roles" multiple="true">
                 <form:option value="0" label="--Select roles--"/>
@@ -58,11 +69,10 @@
             <form:errors path="active" cssClass="error" element="div"/><br><br>
         </c:if>
 
-        <c:if test="${noAdmin==true}">
+        <c:if test="${isAdmin==false}">
             <form:hidden path="roles"/>
             <form:hidden path="active"/>
         </c:if>
-
 
         <hr>
         <button type="submit"

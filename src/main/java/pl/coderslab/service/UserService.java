@@ -11,6 +11,7 @@ import pl.coderslab.repository.UserRepository;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service("userService")
 public class UserService {
@@ -38,8 +39,6 @@ public class UserService {
 
     public void addUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        //user.setActive(1);
-        //Role userRole = roleRepository.findByRole("ADMIN");
         //user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
     }
@@ -54,6 +53,17 @@ public class UserService {
 
     public void delete(Long id) {
         userRepository.deleteById(id);
+    }
+
+    public boolean userIsAdmin(Long id) {
+        Set<Role> userRoles = userRepository.getOne(id).getRoles();
+        for (Role role: userRoles) {
+
+            if(role.getRole().equals("ROLE_ADMIN")) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

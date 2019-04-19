@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -22,7 +23,7 @@ public class User {
     private String name;
 
     @Column(name = "password")
-    @Length(min = 4, message = "Your password must have at least 5 characters")
+    @Length(min = 4, message = "Your password must have at least 4 characters")
     @NotEmpty(message = "Please provide password")
     private String password;
 

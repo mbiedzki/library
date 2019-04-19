@@ -18,7 +18,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/user")
-@SessionAttributes("noAdmin")
+@SessionAttributes("isAdmin")
 public class UserController {
 
     @Autowired
@@ -37,8 +37,13 @@ public class UserController {
     public String userPanel(Model model, Authentication authentication) {
         String loggedUserName = authentication.getName();
         Long userId = userService.findUserByName(loggedUserName).getId();
+
+        //find role
+        if(!userService.userIsAdmin(userId)) {
+            model.addAttribute("isAdmin", false);
+        }
+
         model.addAttribute("user", userService.findUserById(userId));
-        model.addAttribute("noAdmin", true);
         return "redirect:/user/edit/"+userId.toString();
     }
 
@@ -49,7 +54,8 @@ public class UserController {
         return "user";
     }
     @PostMapping("/add")
-    public String add(@Valid User user, BindingResult result, Model model) {
+    public String add(@Valid User user, BindingResult result, Model model,
+                      @RequestParam String newPassword1, @RequestParam String newPassword2) {
 
         //check if user name exists
         User userToAdd = userService.findUserByName(user.getName());
@@ -59,6 +65,11 @@ public class UserController {
         }
         //check validation
         if(result.hasErrors()) {
+            return "user";
+        }
+
+        if((!newPassword1.equals(newPassword2)) || newPassword1.length()<4) {
+            model.addAttribute("passwordError", true);
             return "user";
         }
 
@@ -74,11 +85,27 @@ public class UserController {
         return "user";
     }
     @PostMapping("/edit/{id}")
-    public String editUser(@PathVariable Long id, @Valid User user, BindingResult result, Model model) {
+    public String editUser(@PathVariable Long id, @Valid User user, BindingResult result,
+                           Model model, @RequestParam String newPassword1,
+                           @RequestParam String newPassword2) {
+        //check if user name exists
+        User userToVerify = userService.findUserByName(user.getName());
+        User userToUpdate = userService.findUserById(id);
+
+        if((userToVerify!=null) && (!userToVerify.getId().equals(userToUpdate.getId()))) {
+            model.addAttribute("existsError", true);
+            return "user";
+        }
         if(result.hasErrors()) {
             return "user";
         }
-        User userToUpdate = userService.findUserById(id);
+
+        if((!newPassword1.equals(newPassword2)) || newPassword1.length()<4) {
+            model.addAttribute("passwordError", true);
+            return "user";
+        }
+
+        //if new password is  null
         userToUpdate.setName(user.getName());
         if(!userToUpdate.getPassword().equals(user.getPassword())) {
             userToUpdate.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
