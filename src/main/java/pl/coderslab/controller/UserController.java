@@ -96,24 +96,31 @@ public class UserController {
             model.addAttribute("existsError", true);
             return "user";
         }
-        if(result.hasErrors()) {
-            return "user";
-        }
 
-        if((!newPassword1.equals(newPassword2)) || newPassword1.length()<4) {
+        if((!newPassword1.equals(newPassword2)))  {
             model.addAttribute("passwordError", true);
             return "user";
         }
 
-        //if new password is  null
-        userToUpdate.setName(user.getName());
-        if(!userToUpdate.getPassword().equals(user.getPassword())) {
-            userToUpdate.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        } else {
-            userToUpdate.setPassword(user.getPassword());
+        if(newPassword1.length()>0 && newPassword1.length()<4) {
+            model.addAttribute("passwordError", true);
+            return "user";
         }
+
+        if(result.hasErrors()) {
+            return "user";
+        }
+
+        userToUpdate.setName(user.getName());
         userToUpdate.setActive(user.isActive());
         userToUpdate.setRoles(user.getRoles());
+
+        if(newPassword1.length()==0) {
+            userToUpdate.setPassword(user.getPassword());
+
+        } else {
+            userToUpdate.setPassword(bCryptPasswordEncoder.encode(newPassword1));
+        }
 
         userService.updateUser(userToUpdate);
         return "redirect:/";
