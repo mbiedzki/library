@@ -23,9 +23,11 @@
 <hr/>
 <div class="w3-container w3-xlarge">
     <a class="w3-button w3-xlarge w3-border w3-border-amber w3-round-xxlarge"
-       href="${pageContext.request.contextPath}/books/">Test -  all books in native JSON</a><hr/>
+       href="${pageContext.request.contextPath}/books/">Test - all books in native JSON</a>
+    <hr/>
     <a class="w3-button w3-xlarge w3-border w3-border-amber w3-round-xxlarge"
-       href="${pageContext.request.contextPath}/swagger-ui.html">REST API documentation</a><hr/>
+       href="${pageContext.request.contextPath}/swagger-ui.html">REST API documentation</a>
+    <hr/>
     <a class="w3-button w3-xlarge w3-border w3-border-amber w3-round-xxlarge"
        href="${pageContext.request.contextPath}/actuator/health">Actuator health</a>
     <a class="w3-button w3-xlarge w3-border w3-border-amber w3-round-xxlarge"

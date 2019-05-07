@@ -57,9 +57,9 @@ public class UserService {
 
     public boolean userIsAdmin(Long id) {
         Set<Role> userRoles = userRepository.getOne(id).getRoles();
-        for (Role role: userRoles) {
+        for (Role role : userRoles) {
 
-            if(role.getRole().equals("ROLE_ADMIN")) {
+            if (role.getRole().equals("ROLE_ADMIN")) {
                 return true;
             }
         }

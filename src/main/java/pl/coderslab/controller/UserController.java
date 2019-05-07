@@ -31,7 +31,9 @@ public class UserController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @ModelAttribute("roles")
-    public List<Role> getRoles() {return roleRepository.findAll();}
+    public List<Role> getRoles() {
+        return roleRepository.findAll();
+    }
 
     @GetMapping("/")
     public String userPanel(Model model, Authentication authentication) {
@@ -39,12 +41,12 @@ public class UserController {
         Long userId = userService.findUserByName(loggedUserName).getId();
 
         //find role
-        if(!userService.userIsAdmin(userId)) {
+        if (!userService.userIsAdmin(userId)) {
             model.addAttribute("isAdmin", false);
         }
 
         model.addAttribute("user", userService.findUserById(userId));
-        return "redirect:/user/edit/"+userId.toString();
+        return "redirect:/user/edit/" + userId.toString();
     }
 
     //add new user ***********************************************
@@ -53,22 +55,23 @@ public class UserController {
         model.addAttribute("user", new User());
         return "user";
     }
+
     @PostMapping("/add")
     public String add(@Valid User user, BindingResult result, Model model,
                       @RequestParam String newPassword1, @RequestParam String newPassword2) {
 
         //check if user name exists
         User userToAdd = userService.findUserByName(user.getName());
-        if(userToAdd!=null) {
+        if (userToAdd != null) {
             model.addAttribute("existsError", true);
             return "user";
         }
         //check validation
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             return "user";
         }
 
-        if((!newPassword1.equals(newPassword2)) || newPassword1.length()<4) {
+        if ((!newPassword1.equals(newPassword2)) || newPassword1.length() < 4) {
             model.addAttribute("passwordError", true);
             return "user";
         }
@@ -84,6 +87,7 @@ public class UserController {
         model.addAttribute("user", userService.findUserById(id));
         return "user";
     }
+
     @PostMapping("/edit/{id}")
     public String editUser(@PathVariable Long id, @Valid User user, BindingResult result,
                            Model model, @RequestParam String newPassword1,
@@ -92,22 +96,22 @@ public class UserController {
         User userToVerify = userService.findUserByName(user.getName());
         User userToUpdate = userService.findUserById(id);
 
-        if((userToVerify!=null) && (!userToVerify.getId().equals(userToUpdate.getId()))) {
+        if ((userToVerify != null) && (!userToVerify.getId().equals(userToUpdate.getId()))) {
             model.addAttribute("existsError", true);
             return "user";
         }
 
-        if((!newPassword1.equals(newPassword2)))  {
+        if ((!newPassword1.equals(newPassword2))) {
             model.addAttribute("passwordError", true);
             return "user";
         }
 
-        if(newPassword1.length()>0 && newPassword1.length()<4) {
+        if (newPassword1.length() > 0 && newPassword1.length() < 4) {
             model.addAttribute("passwordError", true);
             return "user";
         }
 
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             return "user";
         }
 
@@ -115,7 +119,7 @@ public class UserController {
         userToUpdate.setActive(user.isActive());
         userToUpdate.setRoles(user.getRoles());
 
-        if(newPassword1.length()==0) {
+        if (newPassword1.length() == 0) {
             userToUpdate.setPassword(user.getPassword());
 
         } else {
@@ -132,8 +136,6 @@ public class UserController {
         userService.delete(id);
         return "redirect:/admin";
     }
-
-
 
 
 }

@@ -39,7 +39,7 @@
     <div class="w3-panel w3-red w3-display-container">
     <span onclick="this.parentElement.style.display='none';"
           class="w3-button w3-large w3-display-topright">&times;</span>
-        <p>Input passwords must be identical and must have at least 4 characters  !</p>
+        <p>Input passwords must be identical and must have at least 4 characters !</p>
     </div>
 </c:if>
 

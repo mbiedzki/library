@@ -9,12 +9,11 @@ import lombok.Setter;
 import javax.persistence.*;
 
 
-
 @Entity
 @Data
 /*@JsonSerialize*/
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name="books")
+@Table(name = "books")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
