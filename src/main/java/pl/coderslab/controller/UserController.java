@@ -80,6 +80,7 @@ public class UserController {
             return "user";
         }
 
+        user.setPassword(newPassword1);
         userService.addUser(user);
         model.addAttribute("added", true);
         return "redirect:/admin";
