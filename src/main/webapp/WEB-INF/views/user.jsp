@@ -43,6 +43,14 @@
     </div>
 </c:if>
 
+<c:if test="${nameError==true}">
+    <div class="w3-panel w3-red w3-display-container">
+    <span onclick="this.parentElement.style.display='none';"
+          class="w3-button w3-large w3-display-topright">&times;</span>
+        <p>User name must have at least 1 character !</p>
+    </div>
+</c:if>
+
 <div class="w3-container w3-large">
     <form:form method="post" modelAttribute="user">
 

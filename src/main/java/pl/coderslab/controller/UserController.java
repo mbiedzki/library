@@ -57,7 +57,7 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public String add(@Valid User user, BindingResult result, Model model,
+    public String add(User user, Model model,
                       @RequestParam String newPassword1, @RequestParam String newPassword2) {
 
         //check if user name exists
@@ -66,12 +66,16 @@ public class UserController {
             model.addAttribute("existsError", true);
             return "user";
         }
-        //check validation
-        if (result.hasErrors()) {
+
+        //check if user name has minimum 1 character
+        if (user.getName().length()==0) {
+            model.addAttribute("nameError", true);
             return "user";
         }
 
-        if ((!newPassword1.equals(newPassword2)) || newPassword1.length() < 4) {
+        //check if both new passwords are identical
+        if ((!newPassword1.equals(newPassword2)) ||
+                (newPassword1.length() > 0 && newPassword1.length() < 4)) {
             model.addAttribute("passwordError", true);
             return "user";
         }
@@ -89,7 +93,7 @@ public class UserController {
     }
 
     @PostMapping("/edit/{id}")
-    public String editUser(@PathVariable Long id, @Valid User user, BindingResult result,
+    public String editUser(@PathVariable Long id, User user,
                            Model model, @RequestParam String newPassword1,
                            @RequestParam String newPassword2) {
         //check if user name exists
@@ -101,17 +105,16 @@ public class UserController {
             return "user";
         }
 
-        if ((!newPassword1.equals(newPassword2))) {
-            model.addAttribute("passwordError", true);
+        //check if user name has minimum 1 character
+        if (user.getName().length()==0) {
+            model.addAttribute("nameError", true);
             return "user";
         }
 
-        if (newPassword1.length() > 0 && newPassword1.length() < 4) {
+        //check if both new passwords are identical
+        if ((!newPassword1.equals(newPassword2)) ||
+                (newPassword1.length() > 0 && newPassword1.length() < 4)) {
             model.addAttribute("passwordError", true);
-            return "user";
-        }
-
-        if (result.hasErrors()) {
             return "user";
         }
 
@@ -119,9 +122,11 @@ public class UserController {
         userToUpdate.setActive(user.isActive());
         userToUpdate.setRoles(user.getRoles());
 
+        //if there was no password change use old encrypted password
         if (newPassword1.length() == 0) {
             userToUpdate.setPassword(user.getPassword());
 
+            //or use new password and encode it
         } else {
             userToUpdate.setPassword(bCryptPasswordEncoder.encode(newPassword1));
         }
@@ -136,6 +141,5 @@ public class UserController {
         userService.delete(id);
         return "redirect:/admin";
     }
-
 
 }
